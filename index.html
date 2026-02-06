@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Da li želiš biti moj valentajn💕?</title>
+    <title>Da li želiš da budeš moj valentajn taco?</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -50,17 +50,10 @@
             color: white;
             position: relative;
         }
-        #no:hover {
-            animation: moveAway 0.5s ease-in-out;
+        .grow {
+            transform: scale(1.5);
         }
-        @keyframes moveAway {
-            0% { transform: translateX(0); }
-            25% { transform: translateX(-100px); }
-            50% { transform: translateY(-50px); }
-            75% { transform: translateX(100px); }
-            100% { transform: translateY(0); }
-        }
-        .celebration {
+        .message {
             display: none;
             font-size: 2em;
             margin-top: 20px;
@@ -87,24 +80,23 @@
     </style>
 </head>
 <body>
-    <h1>Da li želiš biti moj valentajn💕?</h1>
+    <h1>Da li želiš da budeš moj valentajn taco?</h1>
     <div class="buttons">
-        <button id="yes">Yes</button>
-        <button id="no">No</button>
+        <button id="yes">DA</button>
+        <button id="no">NE</button>
     </div>
-    <div class="celebration" id="celebration">
-        Jupi! ❤️ Sad si moj valentajn💕?! 💕
-    </div>
+    <div class="message" id="message"></div>
     <div class="hearts" id="hearts"></div>
 
     <script>
         const yesBtn = document.getElementById('yes');
         const noBtn = document.getElementById('no');
-        const celebration = document.getElementById('celebration');
+        const message = document.getElementById('message');
         const heartsContainer = document.getElementById('hearts');
 
         yesBtn.addEventListener('click', () => {
-            celebration.style.display = 'block';
+            message.textContent = "Yay! ❤️ You're my Valentine! 💕";
+            message.style.display = 'block';
             document.querySelector('.buttons').style.display = 'none';
             // Add floating hearts
             for (let i = 0; i < 20; i++) {
@@ -117,13 +109,17 @@
             }
         });
 
-        noBtn.addEventListener('mouseover', () => {
-            // Randomly move the "No" button
-            const x = Math.random() * (window.innerWidth - 100);
-            const y = Math.random() * (window.innerHeight - 100);
-            noBtn.style.position = 'absolute';
-            noBtn.style.left = x + 'px';
-            noBtn.style.top = y + 'px';
+        noBtn.addEventListener('click', () => {
+            // Grow the Yes button
+            yesBtn.classList.add('grow');
+            // Change the No button to display the sad message
+            noBtn.textContent = "A neee...ajdeee pls pls pls! 😢";
+            noBtn.style.fontSize = '1.2em'; // Make text smaller to fit
+            noBtn.style.padding = '10px 20px'; // Adjust padding
+            // Disable further clicks on No button
+            noBtn.disabled = true;
+            noBtn.style.cursor = 'not-allowed';
+            // Do not hide buttons - they stay visible
         });
     </script>
 </body>
